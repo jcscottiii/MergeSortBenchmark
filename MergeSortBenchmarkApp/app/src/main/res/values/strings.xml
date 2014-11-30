@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MergeSortBenchmark</string>
+    <string name="welcome">Welcome to Merge Sort Benchmark</string>
+    <string name="running">Running Merge Sort Benchmark.\nPlease Wait...</string>
+    <string name="failure">Benchmark experienced internal error. Check logcat.</string>
+    <string name="action_settings">Settings</string>
+    <string name="start">Start Benchmark</string>
+
+</resources>
