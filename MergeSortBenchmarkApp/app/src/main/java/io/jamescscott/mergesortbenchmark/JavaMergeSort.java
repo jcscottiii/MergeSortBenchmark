@@ -1,5 +1,7 @@
 package io.jamescscott.mergesortbenchmark;
 
+import android.util.Log;
+
 import java.util.Arrays;
 import java.util.Random;
 /**
@@ -40,7 +42,7 @@ public class JavaMergeSort implements IMergeSortable{
                 }
             }
         }
-        return left;
+        return mergedArray;
     }
     public static int[] JavaMergeSortFn(int[] array, boolean ascending) {
         if (array.length <= 1) {
@@ -61,10 +63,9 @@ public class JavaMergeSort implements IMergeSortable{
 
 
     @Override
-    public long MergeSortEntry(int size, int ascending, Random random) {
-        int[] array = MergeSortBenchmarkController.createRandomArray(size, random);
+    public long MergeSortEntry(int size, int ascending, int[] randomArray) {
         long beginTime = System.currentTimeMillis();
-        JavaMergeSortFn(array, ascending != 0);
+        JavaMergeSortFn(randomArray, ascending != 0);
         return System.currentTimeMillis() - beginTime;
     }
 

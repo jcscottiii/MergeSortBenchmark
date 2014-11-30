@@ -1,5 +1,5 @@
-// gomergesort
-package gomergesort
+// mergesort
+package mergesort
 
 import (
 	"math/rand"

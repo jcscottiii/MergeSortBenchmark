@@ -6,6 +6,7 @@ import android.util.Log;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Random;
@@ -18,11 +19,11 @@ public class MergeSortBenchmarkController {
     // Default for whether we are sorting in ascending order or not.
     private static final boolean DEFAULT_ASCENDING_MODE = true;
     // Initial size for array.
-    private static final int INITIAL_ARRAY_SIZE = 1000;
+    private static final int INITIAL_ARRAY_SIZE = 10000;
     // How much to increase the array size each iteration.
-    private static final int ARRAY_SIZE_STEP = 1000;
+    private static final int ARRAY_SIZE_STEP = 10000;
     // The max array size to test.
-    private static final int MAX_ARRAY_SIZE = 50000;
+    private static final int MAX_ARRAY_SIZE = 10000;
     // How many samples to take per size.
     private static final int SAMPLES = 1;
 
@@ -30,7 +31,7 @@ public class MergeSortBenchmarkController {
     private static IMergeSortable[] MERGE_SORT_BENCHMARKS = {
             new JavaMergeSort(),
             // new CMergeSort(),
-            // new GoMergeSort()
+            // new GoMergeSort(),
     };
 
     private static final String TAG = "MergeSortBenchmarkController";
@@ -42,14 +43,15 @@ public class MergeSortBenchmarkController {
         Random random = new Random();
         for (int size = INITIAL_ARRAY_SIZE; size <= MAX_ARRAY_SIZE; size += ARRAY_SIZE_STEP) {
             // Create a random array.
-            // int[] randomArray = createRandomArray(size, random);
+            int[] randomArray = createRandomArray(size, random);
 
             // Iterate over the types of benchmarks.
             for (int j = 0; j < MERGE_SORT_BENCHMARKS.length; j++) {
                 long totalDuration = 0;
                 // Time the Merge Sort.
-                for (int sample = 1; sample < SAMPLES; sample++) {
+                for (int sample = 1; sample <= SAMPLES; sample++) {
                     /*
+                    TODO: use this when they enable passing boolean and arrays between go and java.
                     long beginTime = System.currentTimeMillis();
                     int[] result
                             = MERGE_SORT_BENCHMARKS[j].MergeSortE(randomArray, DEFAULT_ASCENDING_MODE);
@@ -58,7 +60,7 @@ public class MergeSortBenchmarkController {
                     // Since not all native languages support passing arrays from java-> native,
                     // have to send size.
                     totalDuration += MERGE_SORT_BENCHMARKS[j].MergeSortEntry(size,
-                                DEFAULT_ASCENDING_MODE ? 1 : 0, random);
+                                DEFAULT_ASCENDING_MODE ? 1 : 0, randomArray);;
                 }
                 long averageDuration = totalDuration / SAMPLES;
                 String benchmarkLanguage = MERGE_SORT_BENCHMARKS[j].getSortLanguage();
@@ -103,7 +105,7 @@ public class MergeSortBenchmarkController {
     }
 
     // Helper function to create a random array of specified length.
-    public static int[] createRandomArray(int elements, Random random) {
+    private static int[] createRandomArray(int elements, Random random) {
         int array[] = new int[elements];
         for (int i = 0; i < elements; i++) {
             array[i] = random.nextInt();

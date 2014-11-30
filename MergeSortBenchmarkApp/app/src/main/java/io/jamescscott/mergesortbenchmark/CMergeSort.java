@@ -7,7 +7,7 @@ import java.util.Random;
 public class CMergeSort implements IMergeSortable {
     private static native int[] CMergeSortFn(int[] array, int size, boolean ascending);
     @Override
-    public long MergeSortEntry(int size, int ascending, Random random) {
+    public long MergeSortEntry(int size, int ascending, int[] randomArray) {
         //return CMergeSortFn(array, array.length, ascending);
         return 0;
     }
