@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import go.Go;
 
 public class MainActivity extends Activity {
 
@@ -51,6 +52,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Go.init(getApplicationContext());
         // Acquire the objects for our UI components once the UI is built.
         START_BENCHMARK_BUTTON = (Button) findViewById(R.id.start_benchmark);
         WELCOME_TEXT_VIEW = (TextView) findViewById(R.id.welcome);
