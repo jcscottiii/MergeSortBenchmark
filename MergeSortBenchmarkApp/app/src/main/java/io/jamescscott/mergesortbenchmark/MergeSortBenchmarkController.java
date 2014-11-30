@@ -26,9 +26,6 @@ public class MergeSortBenchmarkController {
     // How many samples to take per size.
     private static final int SAMPLES = 1;
 
-    // Should we validate the sorted array or not?
-    private static boolean VALIDATE_SORTED_ARRAY = true;
-
     // List of types of Merge Sort Benchmarks to try.
     private static IMergeSortable[] MERGE_SORT_BENCHMARKS = {
             new JavaMergeSort(),
@@ -45,27 +42,23 @@ public class MergeSortBenchmarkController {
         Random random = new Random();
         for (int size = INITIAL_ARRAY_SIZE; size <= MAX_ARRAY_SIZE; size += ARRAY_SIZE_STEP) {
             // Create a random array.
-            int[] randomArray = createRandomArray(size, random);
+            // int[] randomArray = createRandomArray(size, random);
 
             // Iterate over the types of benchmarks.
             for (int j = 0; j < MERGE_SORT_BENCHMARKS.length; j++) {
                 long totalDuration = 0;
                 // Time the Merge Sort.
                 for (int sample = 1; sample < SAMPLES; sample++) {
+                    /*
                     long beginTime = System.currentTimeMillis();
                     int[] result
-                            = MERGE_SORT_BENCHMARKS[j].MergeSort(randomArray, DEFAULT_ASCENDING_MODE);
+                            = MERGE_SORT_BENCHMARKS[j].MergeSortE(randomArray, DEFAULT_ASCENDING_MODE);
                     totalDuration += System.currentTimeMillis() - beginTime;
-
-                    // In case you want to validate the array is sorted properly.
-                    if (VALIDATE_SORTED_ARRAY) {
-                        // Validate the sorted array.
-                        boolean valid = validateSortedArray(result, DEFAULT_ASCENDING_MODE);
-                        if (!valid) {
-                            Log.w(TAG, "Invalid Sorted Array");
-                            return valid;
-                        }
-                    }
+                    */
+                    // Since not all native languages support passing arrays from java-> native,
+                    // have to send size.
+                    totalDuration += MERGE_SORT_BENCHMARKS[j].MergeSortEntry(size,
+                                DEFAULT_ASCENDING_MODE ? 1 : 0, random);
                 }
                 long averageDuration = totalDuration / SAMPLES;
                 String benchmarkLanguage = MERGE_SORT_BENCHMARKS[j].getSortLanguage();
@@ -110,7 +103,7 @@ public class MergeSortBenchmarkController {
     }
 
     // Helper function to create a random array of specified length.
-    private static int[] createRandomArray(int elements, Random random) {
+    public static int[] createRandomArray(int elements, Random random) {
         int array[] = new int[elements];
         for (int i = 0; i < elements; i++) {
             array[i] = random.nextInt();

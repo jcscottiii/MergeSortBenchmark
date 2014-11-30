@@ -1,5 +1,8 @@
 package io.jamescscott.mergesortbenchmark;
 
+import go.gomergesort.Gomergesort;
+import java.util.Random;
+
 /**
  * Created by jamescscott on 11/23/14.
  */
@@ -9,9 +12,9 @@ public class GoMergeSort implements IMergeSortable {
         return "Go";
     }
 
-    private static native int[] GoMergeSortFn(int[] array, boolean ascending);
+    private static native long GoMergeSortFn(int size, boolean ascending);
     @Override
-    public int[] MergeSort(int[] array, boolean ascending) {
-        return GoMergeSortFn(array, ascending);
+    public long MergeSortEntry(int size, int ascending, Random random) {
+        return Gomergesort.GoMergeSortEntry(size, ascending);
     }
 }

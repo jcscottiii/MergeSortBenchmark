@@ -1,7 +1,7 @@
 package io.jamescscott.mergesortbenchmark;
 
 import java.util.Arrays;
-
+import java.util.Random;
 /**
  * Created by jamescscott on 11/22/14.
  */
@@ -59,9 +59,13 @@ public class JavaMergeSort implements IMergeSortable{
         return result;
     }
 
+
     @Override
-    public int[] MergeSort(int[] array, boolean ascending) {
-        return JavaMergeSortFn(array, ascending);
+    public long MergeSortEntry(int size, int ascending, Random random) {
+        int[] array = MergeSortBenchmarkController.createRandomArray(size, random);
+        long beginTime = System.currentTimeMillis();
+        JavaMergeSortFn(array, ascending != 0);
+        return System.currentTimeMillis() - beginTime;
     }
 
     @Override

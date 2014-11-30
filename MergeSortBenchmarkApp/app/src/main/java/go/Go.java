@@ -25,7 +25,7 @@ public final class Go {
                 // TODO(crawshaw): setenv TMPDIR to context.getCacheDir().getAbsolutePath()
                 // TODO(crawshaw): context.registerComponentCallbacks for runtime.GC
 
-                System.loadLibrary("gojni");
+                System.loadLibrary("gomergesort");
 
                 new Thread("GoMain") {
                         public void run() {

@@ -1,3 +1,4 @@
+// gomergesort
 package gomergesort
 
 import (
